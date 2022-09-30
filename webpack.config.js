@@ -7,18 +7,45 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const { loader } = require("mini-css-extract-plugin");
+
 module.exports = {
     mode: 'development',
     devServer: {
       port: 30000,
         hot: true
     },
-    entry: path.join(__dirname, './src/index.js'),
+    // entry: path.join(__dirname, './src/index.js'),
+    entry: {
+        index:  path.join(__dirname, './src/index.js'),
+        // other:  path.join(__dirname, './src/other.js'),
+        // index: {
+        //     import: path.join(__dirname, './src/index.js'),
+        //     dependOn: 'shared'
+        // },
+        print: path.join(__dirname, './src/value.js'),
+        // other: {
+        //     import: path.join(__dirname, './src/other.js'),
+        //     dependOn: 'shared'
+        // },
+        // // 共享的文件lodash，lodash会单独打包到runtime.bundle中
+        // shared: 'lodash'
+    },
     output: {
         path: path.join(__dirname, './dist'),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
+    // 多入口
+    // optimization: {
+    //   runtimeChunk: 'single'
+    // },
+    // optimization: {
+    //     // splitChunksPlugin 可以将公共的依赖模块提取到已有的入口chunk中，或提取到一个新生成的chunk
+    //     splitChunks: {
+    //         chunks: 'all'
+    //     }
+    // },
+    // 更准确清楚错误发生的位置
+    devtool: 'inline-source-map',
     // 引入插件，扩展webpack的能力
     plugins: [
         // 将公共的css、js插入到html中，减少请求次数，优化性能

@@ -1,6 +1,6 @@
-# 1. 创建package.json文件
+# 创建package.json文件
 ### npm init -y
-# 2. 创建webpack.config.js文件
+# 创建webpack.config.js文件
 ### 在其中配置入口、出口文件，配置运行模式，配置运行端口等
 ### 下载webpack-dev-server运行项目
 ### 下载插件配置plugin
@@ -19,3 +19,9 @@
 #### babel（创建babel.config.js文件）
 * 将高级语法转换，将es6转换成es5，在开发环境代码不会进行压缩以及转换，生产环境包中会进行压缩
 * 但看了生产环境的代码，还不是很明白转换的含义，const并么有被转换掉
+
+#### 在静态导入（statically import）使用splitChunksPlugin可以将公共模块分离出来存入chunk，从而减小打包体积，其中mini-css-extract-plugin是将css文件分离出来
+#### 使用source-maps可以在打包后将报错信息定位到实际文件
+#### 在使用静态导入（dynamic import）会自动将文件分离到chunk
+#### 预获取prefetch，将来某些导航下可能需要的资源，在父chunk加载结束后加载，在浏览器闲置时下载，会用于未来某一时刻
+#### 预加载preload，本导航下可能需要的资源，在父chunk加载时，以并行方式开始加载，具有中等优先级，并立即下载，在父chunk中立即请求，用于当下时刻
